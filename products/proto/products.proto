@@ -1,0 +1,36 @@
+//protoc --go_out=../src/services/ --go_opt=paths=source_relative --go-grpc_out=../src/services/ --go-grpc_opt=paths=source_relative products.proto
+
+
+
+
+syntax = "proto3";
+
+
+package products;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "services/";
+
+message Products {
+  repeated Product products = 1;
+}
+
+message Product {
+  string name = 1;
+  string color = 2;
+  string category = 3;
+  string brand = 4;
+  string price = 5;
+  string id = 7;
+}
+
+message ProductDelete {
+  string id = 1;
+}
+
+service ProductService {
+  rpc GetProducts(google.protobuf.Empty) returns (Products) {}
+  rpc CreateProduct(Product) returns (Product) {}
+  rpc DeleteProduct(ProductDelete) returns (ProductDelete) {}
+}

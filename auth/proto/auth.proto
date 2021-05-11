@@ -1,0 +1,19 @@
+//protoc --go_out=../src/services/ --go_opt=paths=source_relative --go-grpc_out=../src/services/ --go-grpc_opt=paths=source_relative chat.proto
+
+
+syntax = "proto3";
+
+package auth;
+
+option go_package = "services/";
+
+message TokenRequest {
+  string email = 1;
+}
+message TokenResponse {
+  string token = 1;
+}
+
+service AuthService {
+  rpc GetToken(TokenRequest) returns (TokenResponse) {}
+}
